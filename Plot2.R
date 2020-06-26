@@ -1,0 +1,10 @@
+rm(list = ls())
+data <- read.csv("~/ProgrammingAssignment2/ProgrammingAssignment2/assignment/ExData_Plotting1/household_power_consumption.txt", sep=";",stringsAsFactors=F,comment.char="")
+neededData <- subset(data, Date %in% c("1/2/2007","2/2/2007"))
+
+neededData$Date <- as.Date(neededData$Date, format="%d/%m/%Y")
+datetime <- paste(neededData$Date, neededData$Time)
+Global_active_power<- as.numeric(neededData$Global_active_power)
+plot(as.POSIXct(datetime),Global_active_power,xlab = "",ylab = "Global_active_power(kilowatts)",type = 'l')
+dev.copy(png, file="plot2.png", height=480, width=480)
+dev.off()
